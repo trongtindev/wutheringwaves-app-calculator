@@ -42,6 +42,12 @@ export class BaseCharacter extends CalculatorBehaviour {
     };
   }
 
+  async dealDamage() {
+    return {
+      isCritical: false,
+    };
+  }
+
   override async onUpdate(time: number) {
     super.onUpdate(time);
   }
