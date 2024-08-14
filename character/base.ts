@@ -3,8 +3,9 @@ import type { BaseCharacterSkills } from './skills';
 import type { BaseCharacterSequences } from './sequences';
 import type { BaseEcho } from '../echoes/base';
 import { BaseCharacterEchoes } from './echoes';
+import { CalculatorBehaviour } from '../behaviour';
 
-export class BaseCharacter {
+export class BaseCharacter extends CalculatorBehaviour {
   level: number;
   sequences: BaseCharacterSequences;
   skills: BaseCharacterSkills;
@@ -17,6 +18,8 @@ export class BaseCharacter {
     weapon: BaseWeapon,
     echoes: BaseEcho[],
   ) {
+    super();
+
     if (level < 1 || level > 90) throw new Error('invalid-level');
     this.level = level;
 
@@ -29,5 +32,17 @@ export class BaseCharacter {
     if (sequences < 0 || sequences > 6) throw new Error('invalid-sequences');
   }
 
-  async initialize() {}
+  async getStats() {
+    return {
+      atk: 0,
+      def: 0,
+      hp: 0,
+      critRate: 0,
+      critDMG: 0,
+    };
+  }
+
+  override async onUpdate(time: number) {
+    super.onUpdate(time);
+  }
 }
